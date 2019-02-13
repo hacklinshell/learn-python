@@ -11,4 +11,4 @@ len('ABC') # 3
 len('中文') # 2  
 len('中文'.encode('utf-8')) #6
 str = 'world'
-print("hello,%s" % str )
+print("hello,%s" % str )# hello,world
