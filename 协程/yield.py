@@ -44,3 +44,23 @@ produce(c)
 #[PRODUCER] Producing 5...
 #[CONSUMER] Consuming 5...
 #[PRODUCER] Consumer return: 200 OK
+
+
+
+
+def jumping_range(N):
+    index = 0
+    while index < N:
+        # 通过send()发送的信息将赋值给jump
+        jump = yield index 
+        print('jump %s' %jump)                 
+        if jump is None:
+            jump = 1
+        index += jump
+
+if __name__ == '__main__':
+    itr = jumping_range(5)
+    print(next(itr))    # index = 0   yield return 0   打印出0  暂停
+    print(itr.send(2))  # jump = 2   打印出2     index =  2      2 < 5  打印出2 暂停
+    print(next(itr))    #  没执行send 所以jump等于None jump = 1 index = 3 打印出3 暂停
+    print(itr.send(-1)) # jump = -1     index = -1 + 3 = 2    打印出2 暂停
